@@ -3,17 +3,17 @@ import { Menu, X, Sun, Moon, Heart } from 'lucide-react';
 
 const Navigation = ({ isMenuOpen, setIsMenuOpen, activeTab, setActiveTab, darkMode, setDarkMode }) => {
   return (
-    <nav className="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-50">
+    <nav className="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-50" aria-label="Main navigation">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-2">
-            <Heart className="h-8 w-8 text-green-500" />
+            <Heart className="h-8 w-8 text-green-500" aria-hidden="true" />
             <span className="text-xl font-bold text-gray-800 dark:text-white">MindWell</span>
           </div>
           
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              {['home', 'learn', 'support', 'blog', 'contact'].map((item) => (
+              {['home', 'learn', 'support', 'community', 'blog', 'contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => setActiveTab(item)}
@@ -32,16 +32,19 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, activeTab, setActiveTab, darkMo
           <div className="flex items-center space-x-4">
             <button
               onClick={() => setDarkMode(!darkMode)}
-              className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
-              {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              {darkMode ? <Sun className="h-5 w-5" aria-hidden="true" /> : <Moon className="h-5 w-5" aria-hidden="true" />}
             </button>
             
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="md:hidden p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+              aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMenuOpen}
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
             </button>
           </div>
         </div>
@@ -50,7 +53,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, activeTab, setActiveTab, darkMo
       {isMenuOpen && (
         <div className="md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            {['home', 'learn', 'support', 'blog', 'contact'].map((item) => (
+            {['home', 'learn', 'support', 'community', 'blog', 'contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => {
