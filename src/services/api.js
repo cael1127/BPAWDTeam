@@ -1,8 +1,10 @@
 // API service functions for communicating with the backend
 
-const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://your-api-domain.com/api' 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL 
+  ? `${import.meta.env.VITE_API_BASE_URL}/api`
   : 'http://localhost:3001/api';
+
+console.log('API Base URL:', API_BASE_URL);
 
 // Generic API request function
 const apiRequest = async (endpoint, options = {}) => {
