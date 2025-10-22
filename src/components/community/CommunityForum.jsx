@@ -14,7 +14,7 @@ const CommunityForum = () => {
       title: 'Coping with Social Anxiety - My Journey',
       content: 'After years of struggling with social anxiety, I wanted to share what has helped me. Deep breathing exercises, gradual exposure, and support from this community have been life-changing.',
       likes: 24,
-      replies: 12,
+      replies: 2,
       timestamp: '2 hours ago',
       tags: ['anxiety', 'coping-strategies', 'success-story'],
       repliesData: [
@@ -43,7 +43,7 @@ const CommunityForum = () => {
       title: 'Reminder: Small Steps Count',
       content: 'Just a reminder that recovery isn\'t linear. If you made your bed today, that\'s progress. If you reached out to one person, that\'s progress. Be kind to yourself.',
       likes: 87,
-      replies: 31,
+      replies: 2,
       timestamp: '5 hours ago',
       tags: ['depression', 'motivation', 'self-care'],
       repliesData: [
@@ -71,7 +71,7 @@ const CommunityForum = () => {
       title: 'Understanding Panic Attacks: A Professional Perspective',
       content: 'As a licensed therapist, I want to demystify panic attacks. They are frightening but not dangerous. Here are evidence-based techniques for managing them...',
       likes: 156,
-      replies: 43,
+      replies: 1,
       timestamp: '1 day ago',
       tags: ['panic-attacks', 'professional-advice', 'anxiety'],
       repliesData: [
@@ -92,7 +92,7 @@ const CommunityForum = () => {
       title: 'Feeling Overwhelmed - Need Support',
       content: 'Having a really tough week. Would appreciate some encouragement and hearing how others cope during difficult times.',
       likes: 18,
-      replies: 27,
+      replies: 2,
       timestamp: '3 hours ago',
       tags: ['support-needed', 'crisis-support'],
       repliesData: [
@@ -161,135 +161,6 @@ const CommunityForum = () => {
     setSelectedPost(post);
   };
 
-  // Replies view
-  if (selectedPost) {
-    return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <button
-            onClick={() => setSelectedPost(null)}
-            className="flex items-center text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 mb-6 font-medium"
-          >
-            <Reply className="h-5 w-5 mr-2" />
-            Back to Forum
-          </button>
-
-          {/* Original Post */}
-          <article className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mr-3">
-                  <span className="text-green-600 dark:text-green-400 font-bold">
-                    {selectedPost.author.split(' ').map(n => n[0]).join('')}
-                  </span>
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold text-gray-900 dark:text-white">
-                      {selectedPost.author}
-                    </span>
-                    {getRoleBadge(selectedPost.authorRole)}
-                  </div>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {selectedPost.timestamp}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              {selectedPost.title}
-            </h2>
-            <p className="text-gray-600 dark:text-gray-300 mb-4">
-              {selectedPost.content}
-            </p>
-
-            <div className="flex flex-wrap gap-2 mb-4">
-              {selectedPost.tags.map((tag, index) => (
-                <span 
-                  key={index}
-                  className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs rounded-full"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-
-            <div className="flex items-center gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-              <button
-                onClick={() => handleLike(selectedPost.id)}
-                className={`flex items-center gap-2 transition-colors ${
-                  likedPosts.has(selectedPost.id)
-                    ? 'text-green-600 dark:text-green-400'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400'
-                }`}
-              >
-                <ThumbsUp className="h-5 w-5" />
-                <span className="font-medium">{selectedPost.likes}</span>
-              </button>
-              <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
-                <Reply className="h-5 w-5" />
-                <span className="font-medium">{selectedPost.replies} Replies</span>
-              </div>
-            </div>
-          </article>
-
-          {/* Replies */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-              Replies ({selectedPost.repliesData?.length || 0})
-            </h3>
-            
-            {selectedPost.repliesData?.map((reply) => (
-              <div key={reply.id} className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 ml-4">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center">
-                    <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-3">
-                      <span className="text-blue-600 dark:text-blue-400 font-bold text-sm">
-                        {reply.author.split(' ').map(n => n[0]).join('')}
-                      </span>
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="font-semibold text-gray-900 dark:text-white text-sm">
-                          {reply.author}
-                        </span>
-                        {reply.authorRole && getRoleBadge(reply.authorRole)}
-                      </div>
-                      <span className="text-xs text-gray-500 dark:text-gray-400">
-                        {reply.timestamp}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <p className="text-gray-600 dark:text-gray-300 text-sm ml-11">
-                  {reply.content}
-                </p>
-                <div className="flex items-center gap-4 mt-3 ml-11">
-                  <button className="flex items-center gap-1 text-gray-500 hover:text-green-600 dark:hover:text-green-400 transition-colors">
-                    <ThumbsUp className="h-4 w-4" />
-                    <span className="text-xs">{reply.likes}</span>
-                  </button>
-                </div>
-              </div>
-            ))}
-
-            {(!selectedPost.repliesData || selectedPost.repliesData.length === 0) && (
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-8 text-center">
-                <MessageSquare className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  No replies yet
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400">
-                  Be the first to reply to this post!
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
@@ -469,6 +340,142 @@ const CommunityForum = () => {
           </div>
         </div>
       </div>
+
+      {/* Replies Modal */}
+      {selectedPost && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                Replies ({selectedPost.repliesData?.length || 0})
+              </h2>
+              <button
+                onClick={() => setSelectedPost(null)}
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="overflow-y-auto max-h-[calc(90vh-120px)]">
+              <div className="p-6">
+                {/* Original Post */}
+                <article className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mr-3">
+                        <span className="text-green-600 dark:text-green-400 font-bold">
+                          {selectedPost.author.split(' ').map(n => n[0]).join('')}
+                        </span>
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold text-gray-900 dark:text-white">
+                            {selectedPost.author}
+                          </span>
+                          {getRoleBadge(selectedPost.authorRole)}
+                        </div>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">
+                          {selectedPost.timestamp}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                    {selectedPost.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-3">
+                    {selectedPost.content}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    {selectedPost.tags.map((tag, index) => (
+                      <span 
+                        key={index}
+                        className="px-2 py-1 bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 text-xs rounded-full"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center gap-4 pt-3 border-t border-gray-300 dark:border-gray-600">
+                    <button
+                      onClick={() => handleLike(selectedPost.id)}
+                      className={`flex items-center gap-2 transition-colors ${
+                        likedPosts.has(selectedPost.id)
+                          ? 'text-green-600 dark:text-green-400'
+                          : 'text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400'
+                      }`}
+                    >
+                      <ThumbsUp className="h-4 w-4" />
+                      <span className="text-sm font-medium">{selectedPost.likes}</span>
+                    </button>
+                    <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+                      <Reply className="h-4 w-4" />
+                      <span className="text-sm font-medium">{selectedPost.replies} Replies</span>
+                    </div>
+                  </div>
+                </article>
+
+                {/* Replies */}
+                <div className="space-y-4">
+                  {selectedPost.repliesData?.map((reply) => (
+                    <div key={reply.id} className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center">
+                          <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-3">
+                            <span className="text-blue-600 dark:text-blue-400 font-bold text-sm">
+                              {reply.author.split(' ').map(n => n[0]).join('')}
+                            </span>
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <span className="font-semibold text-gray-900 dark:text-white text-sm">
+                                {reply.author}
+                              </span>
+                              {reply.authorRole && getRoleBadge(reply.authorRole)}
+                            </div>
+                            <span className="text-xs text-gray-500 dark:text-gray-400">
+                              {reply.timestamp}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="text-gray-600 dark:text-gray-300 text-sm ml-11">
+                        {reply.content}
+                      </p>
+                      <div className="flex items-center gap-4 mt-3 ml-11">
+                        <button className="flex items-center gap-1 text-gray-500 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                          <ThumbsUp className="h-4 w-4" />
+                          <span className="text-xs">{reply.likes}</span>
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+
+                  {(!selectedPost.repliesData || selectedPost.repliesData.length === 0) && (
+                    <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-8 text-center">
+                      <MessageSquare className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                        No replies yet
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-400">
+                        Be the first to reply to this post!
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
