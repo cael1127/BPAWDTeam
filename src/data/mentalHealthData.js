@@ -95,7 +95,11 @@ export const localHelplines = {
     helplines: [
       { name: "NYC Well", number: "1-888-692-9355", type: "24/7 Mental Health Support", description: "Free, confidential mental health support for NYC residents" },
       { name: "NYC Crisis Prevention", number: "1-800-LIFENET", type: "Crisis Support", description: "Crisis intervention and suicide prevention" },
-      { name: "NYC Department of Health", number: "311", type: "Mental Health Resources", description: "City services and mental health referrals" }
+      { name: "NYC Department of Health", number: "311", type: "Mental Health Resources", description: "City services and mental health referrals" },
+      { name: "NYC Mental Health Services", number: "1-888-692-9355", type: "Mental Health Services", description: "Comprehensive mental health services and referrals" },
+      { name: "NYC 211", number: "211", type: "Resource Referral", description: "Information and referral for health and human services" },
+      { name: "NAMI NYC Metro", number: "1-212-684-3264", type: "Support & Education", description: "Mental health support groups and education" },
+      { name: "NYC Veterans Crisis Line", number: "1-800-273-8255", type: "Veterans Support", description: "Specialized crisis support for veterans" }
     ]
   },
   "90001-90899": { // Los Angeles, CA
@@ -103,7 +107,12 @@ export const localHelplines = {
     helplines: [
       { name: "LA County Mental Health", number: "1-800-854-7771", type: "24/7 Crisis Support", description: "Los Angeles County mental health crisis line" },
       { name: "LA Warm Line", number: "1-855-952-9276", type: "Peer Support", description: "Non-crisis emotional support and resources" },
-      { name: "LA County 211", number: "211", type: "Resource Referral", description: "Information and referral for health and human services" }
+      { name: "LA County 211", number: "211", type: "Resource Referral", description: "Information and referral for health and human services" },
+      { name: "LA County Crisis Line", number: "1-800-854-7771", type: "Crisis Support", description: "24/7 crisis intervention and support" },
+      { name: "NAMI Los Angeles", number: "1-323-294-7810", type: "Support & Education", description: "Mental health support groups and family education" },
+      { name: "LA County Mental Health Access", number: "1-800-854-7771", type: "Mental Health Services", description: "Access to mental health services and treatment" },
+      { name: "LA Veterans Crisis Line", number: "1-800-273-8255", type: "Veterans Support", description: "Specialized crisis support for veterans" },
+      { name: "LA County Child Crisis", number: "1-800-854-7771", type: "Youth Support", description: "Crisis support for children and adolescents" }
     ]
   },
   "60601-60699": { // Chicago, IL
@@ -111,7 +120,12 @@ export const localHelplines = {
     helplines: [
       { name: "Chicago Crisis Line", number: "1-800-273-8255", type: "24/7 Crisis Support", description: "Crisis intervention and suicide prevention" },
       { name: "Chicago Mental Health", number: "312-747-1020", type: "Mental Health Services", description: "City mental health services and referrals" },
-      { name: "Illinois Warm Line", number: "1-866-359-7953", type: "Peer Support", description: "Peer support and recovery resources" }
+      { name: "Illinois Warm Line", number: "1-866-359-7953", type: "Peer Support", description: "Peer support and recovery resources" },
+      { name: "Illinois 211", number: "211", type: "Resource Referral", description: "Information and referral for health and human services" },
+      { name: "NAMI Chicago", number: "1-312-563-0445", type: "Support & Education", description: "Mental health support groups and family education" },
+      { name: "Chicago Department of Public Health", number: "312-747-9884", type: "Mental Health Services", description: "Public health mental health services" },
+      { name: "Illinois Veterans Crisis Line", number: "1-800-273-8255", type: "Veterans Support", description: "Specialized crisis support for veterans" },
+      { name: "Chicago Child Crisis", number: "1-800-273-8255", type: "Youth Support", description: "Crisis support for children and adolescents" }
     ]
   },
   "77001-77299": { // Houston, TX
@@ -119,7 +133,12 @@ export const localHelplines = {
     helplines: [
       { name: "Harris County Crisis", number: "1-800-273-8255", type: "24/7 Crisis Support", description: "Crisis intervention and mental health support" },
       { name: "Houston Area Women's Center", number: "713-528-2121", type: "Crisis Support", description: "Crisis intervention and counseling services" },
-      { name: "Texas 211", number: "211", type: "Resource Referral", description: "Health and human services information" }
+      { name: "Texas 211", number: "211", type: "Resource Referral", description: "Health and human services information" },
+      { name: "Harris County Mental Health", number: "1-800-273-8255", type: "Mental Health Services", description: "Comprehensive mental health services" },
+      { name: "NAMI Houston", number: "1-713-970-4483", type: "Support & Education", description: "Mental health support groups and family education" },
+      { name: "Houston Veterans Crisis Line", number: "1-800-273-8255", type: "Veterans Support", description: "Specialized crisis support for veterans" },
+      { name: "Harris County Child Crisis", number: "1-800-273-8255", type: "Youth Support", description: "Crisis support for children and adolescents" },
+      { name: "Houston Mental Health Authority", number: "713-970-7000", type: "Mental Health Services", description: "Local mental health authority services" }
     ]
   },
   "85001-85099": { // Phoenix, AZ
@@ -127,7 +146,12 @@ export const localHelplines = {
     helplines: [
       { name: "Arizona Crisis Line", number: "1-800-631-1314", type: "24/7 Crisis Support", description: "Statewide crisis intervention services" },
       { name: "Maricopa County Crisis", number: "602-222-9444", type: "Crisis Support", description: "Local crisis intervention and support" },
-      { name: "Arizona 211", number: "211", type: "Resource Referral", description: "Community resources and services" }
+      { name: "Arizona 211", number: "211", type: "Resource Referral", description: "Community resources and services" },
+      { name: "Maricopa County Mental Health", number: "602-222-9444", type: "Mental Health Services", description: "Comprehensive mental health services" },
+      { name: "NAMI Arizona", number: "1-602-244-8166", type: "Support & Education", description: "Mental health support groups and family education" },
+      { name: "Arizona Veterans Crisis Line", number: "1-800-273-8255", type: "Veterans Support", description: "Specialized crisis support for veterans" },
+      { name: "Maricopa County Child Crisis", number: "602-222-9444", type: "Youth Support", description: "Crisis support for children and adolescents" },
+      { name: "Phoenix Mental Health Services", number: "602-222-9444", type: "Mental Health Services", description: "City mental health services and referrals" }
     ]
   },
   "33101-33199": { // Miami, FL
@@ -135,7 +159,12 @@ export const localHelplines = {
     helplines: [
       { name: "Miami-Dade Crisis", number: "1-800-273-8255", type: "24/7 Crisis Support", description: "Crisis intervention and suicide prevention" },
       { name: "Miami-Dade 211", number: "211", type: "Resource Referral", description: "Health and human services information" },
-      { name: "Florida Crisis Line", number: "1-800-273-8255", type: "Crisis Support", description: "Statewide crisis intervention" }
+      { name: "Florida Crisis Line", number: "1-800-273-8255", type: "Crisis Support", description: "Statewide crisis intervention" },
+      { name: "Miami-Dade Mental Health", number: "1-800-273-8255", type: "Mental Health Services", description: "Comprehensive mental health services" },
+      { name: "NAMI Miami-Dade", number: "1-305-665-4066", type: "Support & Education", description: "Mental health support groups and family education" },
+      { name: "Florida Veterans Crisis Line", number: "1-800-273-8255", type: "Veterans Support", description: "Specialized crisis support for veterans" },
+      { name: "Miami-Dade Child Crisis", number: "1-800-273-8255", type: "Youth Support", description: "Crisis support for children and adolescents" },
+      { name: "Miami-Dade Public Health", number: "305-324-2400", type: "Mental Health Services", description: "Public health mental health services" }
     ]
   },
   "98101-98199": { // Seattle, WA
@@ -143,7 +172,12 @@ export const localHelplines = {
     helplines: [
       { name: "King County Crisis", number: "1-800-273-8255", type: "24/7 Crisis Support", description: "Crisis intervention and mental health support" },
       { name: "Seattle Crisis Line", number: "206-461-3222", type: "Crisis Support", description: "Local crisis intervention services" },
-      { name: "Washington 211", number: "211", type: "Resource Referral", description: "Community resources and services" }
+      { name: "Washington 211", number: "211", type: "Resource Referral", description: "Community resources and services" },
+      { name: "King County Mental Health", number: "1-800-273-8255", type: "Mental Health Services", description: "Comprehensive mental health services" },
+      { name: "NAMI Seattle", number: "1-206-783-9264", type: "Support & Education", description: "Mental health support groups and family education" },
+      { name: "Washington Veterans Crisis Line", number: "1-800-273-8255", type: "Veterans Support", description: "Specialized crisis support for veterans" },
+      { name: "King County Child Crisis", number: "1-800-273-8255", type: "Youth Support", description: "Crisis support for children and adolescents" },
+      { name: "Seattle Mental Health Services", number: "206-461-3222", type: "Mental Health Services", description: "City mental health services and referrals" }
     ]
   },
   "02101-02199": { // Boston, MA
@@ -151,7 +185,12 @@ export const localHelplines = {
     helplines: [
       { name: "Massachusetts Crisis", number: "1-800-273-8255", type: "24/7 Crisis Support", description: "Statewide crisis intervention services" },
       { name: "Boston Emergency Services", number: "1-800-981-4357", type: "Crisis Support", description: "Emergency mental health services" },
-      { name: "Massachusetts 211", number: "211", type: "Resource Referral", description: "Health and human services information" }
+      { name: "Massachusetts 211", number: "211", type: "Resource Referral", description: "Health and human services information" },
+      { name: "Massachusetts Mental Health", number: "1-800-273-8255", type: "Mental Health Services", description: "Comprehensive mental health services" },
+      { name: "NAMI Massachusetts", number: "1-617-580-8541", type: "Support & Education", description: "Mental health support groups and family education" },
+      { name: "Massachusetts Veterans Crisis Line", number: "1-800-273-8255", type: "Veterans Support", description: "Specialized crisis support for veterans" },
+      { name: "Massachusetts Child Crisis", number: "1-800-273-8255", type: "Youth Support", description: "Crisis support for children and adolescents" },
+      { name: "Boston Public Health Commission", number: "617-534-5395", type: "Mental Health Services", description: "Public health mental health services" }
     ]
   },
   "30301-30399": { // Atlanta, GA
@@ -159,7 +198,12 @@ export const localHelplines = {
     helplines: [
       { name: "Georgia Crisis Line", number: "1-800-273-8255", type: "24/7 Crisis Support", description: "Crisis intervention and suicide prevention" },
       { name: "Atlanta Crisis Center", number: "404-873-1766", type: "Crisis Support", description: "Local crisis intervention services" },
-      { name: "Georgia 211", number: "211", type: "Resource Referral", description: "Community resources and services" }
+      { name: "Georgia 211", number: "211", type: "Resource Referral", description: "Community resources and services" },
+      { name: "Georgia Mental Health", number: "1-800-273-8255", type: "Mental Health Services", description: "Comprehensive mental health services" },
+      { name: "NAMI Georgia", number: "1-770-234-0855", type: "Support & Education", description: "Mental health support groups and family education" },
+      { name: "Georgia Veterans Crisis Line", number: "1-800-273-8255", type: "Veterans Support", description: "Specialized crisis support for veterans" },
+      { name: "Georgia Child Crisis", number: "1-800-273-8255", type: "Youth Support", description: "Crisis support for children and adolescents" },
+      { name: "Atlanta Mental Health Services", number: "404-873-1766", type: "Mental Health Services", description: "City mental health services and referrals" }
     ]
   },
   "80201-80299": { // Denver, CO
@@ -167,7 +211,12 @@ export const localHelplines = {
     helplines: [
       { name: "Colorado Crisis Line", number: "1-844-493-8255", type: "24/7 Crisis Support", description: "Statewide crisis intervention services" },
       { name: "Denver Crisis Center", number: "303-860-1200", type: "Crisis Support", description: "Local crisis intervention and support" },
-      { name: "Colorado 211", number: "211", type: "Resource Referral", description: "Health and human services information" }
+      { name: "Colorado 211", number: "211", type: "Resource Referral", description: "Health and human services information" },
+      { name: "Colorado Mental Health", number: "1-844-493-8255", type: "Mental Health Services", description: "Comprehensive mental health services" },
+      { name: "NAMI Colorado", number: "1-303-321-3104", type: "Support & Education", description: "Mental health support groups and family education" },
+      { name: "Colorado Veterans Crisis Line", number: "1-800-273-8255", type: "Veterans Support", description: "Specialized crisis support for veterans" },
+      { name: "Colorado Child Crisis", number: "1-844-493-8255", type: "Youth Support", description: "Crisis support for children and adolescents" },
+      { name: "Denver Mental Health Services", number: "303-860-1200", type: "Mental Health Services", description: "City mental health services and referrals" }
     ]
   }
 };
