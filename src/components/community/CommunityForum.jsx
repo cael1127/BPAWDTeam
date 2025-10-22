@@ -5,6 +5,13 @@ const CommunityForum = () => {
   const [selectedTopic, setSelectedTopic] = useState('all');
   const [selectedPost, setSelectedPost] = useState(null);
   const [likedPosts, setLikedPosts] = useState(new Set());
+  const [showNewPostForm, setShowNewPostForm] = useState(false);
+  const [newPost, setNewPost] = useState({
+    title: '',
+    content: '',
+    topic: 'general',
+    tags: []
+  });
   const [posts, setPosts] = useState([
     {
       id: 1,
@@ -161,6 +168,41 @@ const CommunityForum = () => {
     setSelectedPost(post);
   };
 
+  const handleNewPost = () => {
+    if (newPost.title.trim() && newPost.content.trim()) {
+      const post = {
+        id: posts.length + 1,
+        author: 'You',
+        authorRole: 'member',
+        topic: newPost.topic,
+        title: newPost.title,
+        content: newPost.content,
+        likes: 0,
+        replies: 0,
+        timestamp: 'Just now',
+        tags: newPost.tags,
+        repliesData: []
+      };
+      setPosts([post, ...posts]);
+      setNewPost({ title: '', content: '', topic: 'general', tags: [] });
+      setShowNewPostForm(false);
+    }
+  };
+
+  const handleTagInput = (e) => {
+    if (e.key === 'Enter' && e.target.value.trim()) {
+      const tag = e.target.value.trim().toLowerCase();
+      if (!newPost.tags.includes(tag)) {
+        setNewPost({ ...newPost, tags: [...newPost.tags, tag] });
+        e.target.value = '';
+      }
+    }
+  };
+
+  const removeTag = (tagToRemove) => {
+    setNewPost({ ...newPost, tags: newPost.tags.filter(tag => tag !== tagToRemove) });
+  };
+
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
@@ -218,7 +260,10 @@ const CommunityForum = () => {
               </div>
 
               <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-                <button className="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors">
+                <button 
+                  onClick={() => setShowNewPostForm(true)}
+                  className="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors"
+                >
                   New Post
                 </button>
               </div>
@@ -472,6 +517,142 @@ const CommunityForum = () => {
                   )}
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* New Post Modal */}
+      {showNewPostForm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                Create New Post
+              </h2>
+              <button
+                onClick={() => setShowNewPostForm(false)}
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="overflow-y-auto max-h-[calc(90vh-120px)]">
+              <div className="p-6 space-y-6">
+                {/* Topic Selection */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Topic
+                  </label>
+                  <select
+                    value={newPost.topic}
+                    onChange={(e) => setNewPost({ ...newPost, topic: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:text-white"
+                  >
+                    <option value="general">General Discussion</option>
+                    <option value="anxiety">Anxiety Support</option>
+                    <option value="depression">Depression Support</option>
+                    <option value="support">Peer Support</option>
+                  </select>
+                </div>
+
+                {/* Title Input */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Title
+                  </label>
+                  <input
+                    type="text"
+                    value={newPost.title}
+                    onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
+                    placeholder="Enter a descriptive title for your post..."
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:text-white"
+                  />
+                </div>
+
+                {/* Content Input */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Content
+                  </label>
+                  <textarea
+                    value={newPost.content}
+                    onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
+                    placeholder="Share your thoughts, experiences, or ask for support..."
+                    rows={6}
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:text-white resize-none"
+                  />
+                </div>
+
+                {/* Tags Input */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Tags (optional)
+                  </label>
+                  <input
+                    type="text"
+                    onKeyPress={handleTagInput}
+                    placeholder="Type a tag and press Enter..."
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:text-white"
+                  />
+                  {newPost.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {newPost.tags.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="inline-flex items-center px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs rounded-full"
+                        >
+                          #{tag}
+                          <button
+                            onClick={() => removeTag(tag)}
+                            className="ml-1 text-green-500 hover:text-green-700 dark:hover:text-green-300"
+                          >
+                            ×
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Guidelines */}
+                <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                  <div className="flex items-start">
+                    <Shield className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h3 className="font-semibold text-blue-900 dark:text-blue-200 mb-1">
+                        Community Guidelines
+                      </h3>
+                      <p className="text-sm text-blue-800 dark:text-blue-300">
+                        Be respectful and supportive. No medical advice. Keep personal information private. 
+                        Report concerning content. In crisis? Call 988 or text HOME to 741741.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="flex items-center justify-end gap-4 p-6 border-t border-gray-200 dark:border-gray-700">
+              <button
+                onClick={() => setShowNewPostForm(false)}
+                className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleNewPost}
+                disabled={!newPost.title.trim() || !newPost.content.trim()}
+                className="px-6 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-lg font-semibold transition-colors"
+              >
+                Post
+              </button>
             </div>
           </div>
         </div>

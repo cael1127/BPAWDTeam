@@ -10,12 +10,12 @@ const CommunityPage = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-purple-600 to-blue-600 text-white py-16 px-4 sm:px-6 lg:px-8">
+      <section className="bg-gradient-to-r from-green-600 to-emerald-600 text-white py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Connect & Support Each Other
           </h1>
-          <p className="text-xl md:text-2xl text-purple-100 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-green-100 mb-8 max-w-3xl mx-auto">
             Join our safe, moderated community where you can share experiences, offer support, and build meaningful connections with others who understand.
           </p>
           
@@ -24,8 +24,8 @@ const CommunityPage = () => {
               onClick={() => setActiveView('forum')}
               className={`px-8 py-3 rounded-lg font-semibold transition-colors ${
                 activeView === 'forum'
-                  ? 'bg-white text-purple-600'
-                  : 'bg-purple-500 hover:bg-purple-400 text-white'
+                  ? 'bg-white text-green-600'
+                  : 'bg-green-500 hover:bg-green-400 text-white'
               }`}
             >
               <MessageCircle className="inline-block h-5 w-5 mr-2" />
