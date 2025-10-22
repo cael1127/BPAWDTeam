@@ -133,46 +133,48 @@ See these load times? Sub-second rendering on 4G connections."
 
 ### Innovation Showcase: Advanced Features (Team Member #3 - 2 minutes)
 
-**[Switch to Community/Chat features]**
+**[Switch to Local Helpline Finder]**
 
 "Now for our killer features that set us apart:
 
-**1. Community Support Forum:**  
+**1. Local Helpline Finder:**  
+[Show LocalHelplineFinder.jsx]  
+- Zip code-based search for 80+ local mental health resources
+- Covers 10 major US cities with NAMI chapters, veterans support, and specialized services
+- Real-time validation and click-to-call functionality
+- Fallback to national resources for uncovered areas
+
+[Enter zip code 10001 for NYC demo]  
+Watch—instant access to 8+ local NYC resources with direct calling capabilities.
+
+**2. Enhanced Community Support Forum:**  
 [Show CommunityForum.jsx]  
-- Threaded discussions with moderation
-- User roles: Members, Moderators, Licensed Counselors
-- Real-time posting and interaction
+- Modal-based replies system instead of separate pages
+- Infinite like prevention with state management
+- Accurate reply counts based on actual data
+- New post creation with topic selection and tagging
 - Crisis keyword detection with automatic intervention
 
-**2. Live Peer Support Chat:**  
-[Open LiveChat component]  
-- 24/7 peer support with crisis detection
-- When users type crisis keywords like 'suicide', our system:
-  - Immediately displays crisis resources
-  - Offers direct 988 Lifeline connection
-  - Notifies moderators for human intervention
+**3. Comprehensive Mental Health Education:**  
+[Show LearnPage.jsx]  
+- 10 detailed mental health disorders with prevalence statistics
+- 12+ comprehensive blog articles (4-15 minute reads)
+- Professional-grade content with evidence-based resources
+- Interactive cards with hover effects and animations
 
-[Type 'I'm feeling suicidal' in demo]  
-Watch—instant crisis intervention appears with clickable emergency contacts.
+**4. Advanced UX Enhancements:**  
+[Show HomePage.jsx]  
+- Smooth animations and staggered entrance effects
+- Auto-detection of browser color scheme preferences
+- Custom scrollbars and enhanced focus states
+- Hover interactions with scale transforms and lift effects
 
-**3. AI Mental Health Assistant:**  
-[Open AIAssistant]  
-- Keyword-based resource recommendation
-- Context-aware responses
-- Directs to appropriate support based on needs
-- Never replaces professional help—always supplements
-
-[Ask AI: 'I'm having a panic attack']  
-See how it provides immediate coping strategies AND encourages professional help?
-
-**4. Appointment Scheduler:**  
+**5. Appointment Scheduler:**  
 [Show AppointmentForm.jsx]  
-- Service type selection
+- Service type selection with validation
 - Date/time picker with availability
-- Insurance information
-- Multi-step validation
-- Email confirmation
-- 48-hour appointment guarantee"
+- Multi-step form with error handling
+- Email confirmation system"
 
 ---
 

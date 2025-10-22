@@ -72,25 +72,31 @@
 
 > "Let me demonstrate our key features in action.
 > 
-> **Mood Tracker**: Interactive daily check-in system with pattern recognition and crisis detection.
+> **Local Helpline Finder**: Zip code-based search for 80+ local mental health resources across 10 major US cities, including NAMI chapters, veterans support, and specialized services.
+> 
+> **Enhanced Mood Tracker**: Interactive daily check-in system with smooth animations, pattern recognition, and crisis detection with visual feedback.
+> 
+> **Comprehensive Learn Section**: 10 detailed mental health disorders with prevalence statistics, treatment information, and evidence-based resources.
+> 
+> **Expanded Blog Content**: 12+ comprehensive articles (4-15 minute reads) covering anxiety, self-care, depression, and specialized topics with professional-grade content.
+> 
+> **Community Forum**: Modal-based replies system, infinite like prevention, accurate reply counts, and new post creation with topic selection and tagging.
 > 
 > **Appointment Scheduler**: Multi-step form with validation, service selection, and confirmation workflow.
 > 
-> **Crisis Support**: One-click access to helplines with direct calling and texting capabilities.
+> **Crisis Support**: One-click access to national and local helplines with direct calling and texting capabilities.
 > 
-> **Educational Content**: Comprehensive mental health information with symptoms, treatments, and resources.
-> 
-> **Community Features**: Moderated forums for peer support and resource sharing.
-> 
-> **Dark/Light Mode**: Accessibility feature for users with light sensitivity or personal preference."
+> **UX Enhancements**: Smooth animations, hover effects, custom scrollbars, and auto-detection of browser color scheme preferences."
 
 **Live Demo Flow:**
-1. Navigate through responsive design
-2. Demonstrate mood tracker interaction
-3. Show appointment form with validation
-4. Display crisis helplines with click-to-call
-5. Browse educational content
-6. Toggle dark/light mode
+1. Demonstrate local helpline finder with zip code search
+2. Show enhanced mood tracker with animations
+3. Browse comprehensive learn section with disorder cards
+4. Display expanded blog content with detailed articles
+5. Navigate community forum with modal replies
+6. Show appointment form with validation
+7. Display crisis helplines with click-to-call
+8. Toggle dark/light mode with auto-detection
 
 ---
 
