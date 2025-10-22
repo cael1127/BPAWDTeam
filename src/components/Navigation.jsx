@@ -5,7 +5,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, activeTab, setActiveTab, darkMo
   return (
     <nav className="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-50" aria-label="Main navigation">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="relative flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2 flex-shrink-0">
             <Heart className="h-8 w-8 text-green-500" aria-hidden="true" />
@@ -13,7 +13,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, activeTab, setActiveTab, darkMo
           </div>
           
           {/* Navigation Menu - Centered */}
-          <div className="hidden md:block flex-1 flex justify-center">
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2">
             <div className="flex items-center space-x-1">
               {['home', 'learn', 'support', 'community', 'blog', 'contact'].map((item) => (
                 <button
