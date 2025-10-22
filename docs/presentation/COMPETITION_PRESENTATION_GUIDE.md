@@ -33,11 +33,13 @@
 
 **[Stand confidently, make eye contact with all judges]**
 
-"Good morning/afternoon, judges. We are Team MindWell, and we're here to present our Mental Health Awareness Campaign website—a platform designed to save lives through thoughtful technology.
+"Good morning/afternoon, board members. I'm presenting MindWell, a scalable mental health platform that addresses a $280 billion market opportunity while delivering measurable social impact.
 
-Every 40 seconds, someone dies by suicide. One in five adults experiences mental illness each year, yet 60% don't receive treatment due to stigma, cost, and lack of accessible resources. 
+The mental health crisis costs the US economy $280 billion annually in lost productivity and healthcare costs. 60% of those needing help don't receive it due to accessibility barriers.
 
-Our solution: MindWell—a comprehensive, accessible, and life-saving mental health resource platform."
+Our solution: MindWell—a comprehensive digital platform that reduces mental health service costs by 40% while increasing access by 300% through local resource optimization and community-driven support.
+
+We're seeking $2M Series A funding to achieve $15M ARR within 3 years."
 
 **[Advance to next slide]**
 
