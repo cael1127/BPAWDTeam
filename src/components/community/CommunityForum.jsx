@@ -3,6 +3,8 @@ import { MessageSquare, ThumbsUp, Reply, Flag, Shield, Users, TrendingUp } from 
 
 const CommunityForum = () => {
   const [selectedTopic, setSelectedTopic] = useState('all');
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [likedPosts, setLikedPosts] = useState(new Set());
   const [posts, setPosts] = useState([
     {
       id: 1,
@@ -14,7 +16,24 @@ const CommunityForum = () => {
       likes: 24,
       replies: 12,
       timestamp: '2 hours ago',
-      tags: ['anxiety', 'coping-strategies', 'success-story']
+      tags: ['anxiety', 'coping-strategies', 'success-story'],
+      repliesData: [
+        {
+          id: 1,
+          author: 'Mike T.',
+          content: 'Thank you for sharing! Deep breathing has helped me too. What specific exercises do you recommend?',
+          timestamp: '1 hour ago',
+          likes: 5
+        },
+        {
+          id: 2,
+          author: 'Dr. Emily Chen',
+          authorRole: 'counselor',
+          content: 'Excellent advice, Sarah. Gradual exposure is indeed one of the most effective techniques for social anxiety. Keep up the great work!',
+          timestamp: '45 minutes ago',
+          likes: 8
+        }
+      ]
     },
     {
       id: 2,
@@ -26,7 +45,23 @@ const CommunityForum = () => {
       likes: 87,
       replies: 31,
       timestamp: '5 hours ago',
-      tags: ['depression', 'motivation', 'self-care']
+      tags: ['depression', 'motivation', 'self-care'],
+      repliesData: [
+        {
+          id: 1,
+          author: 'Alex K.',
+          content: 'This really helped me today. Thank you for the reminder.',
+          timestamp: '4 hours ago',
+          likes: 12
+        },
+        {
+          id: 2,
+          author: 'Sarah L.',
+          content: 'I needed to hear this. Sometimes I forget that small wins matter too.',
+          timestamp: '3 hours ago',
+          likes: 7
+        }
+      ]
     },
     {
       id: 3,
@@ -38,7 +73,16 @@ const CommunityForum = () => {
       likes: 156,
       replies: 43,
       timestamp: '1 day ago',
-      tags: ['panic-attacks', 'professional-advice', 'anxiety']
+      tags: ['panic-attacks', 'professional-advice', 'anxiety'],
+      repliesData: [
+        {
+          id: 1,
+          author: 'Tom R.',
+          content: 'This is so helpful! I always thought I was having a heart attack.',
+          timestamp: '20 hours ago',
+          likes: 15
+        }
+      ]
     },
     {
       id: 4,
@@ -50,7 +94,23 @@ const CommunityForum = () => {
       likes: 18,
       replies: 27,
       timestamp: '3 hours ago',
-      tags: ['support-needed', 'crisis-support']
+      tags: ['support-needed', 'crisis-support'],
+      repliesData: [
+        {
+          id: 1,
+          author: 'Maria S.',
+          content: 'You\'re not alone, Alex. I\'ve been there too. Take it one day at a time.',
+          timestamp: '2 hours ago',
+          likes: 9
+        },
+        {
+          id: 2,
+          author: 'John D.',
+          content: 'Sending you virtual hugs. This community is here for you.',
+          timestamp: '1 hour ago',
+          likes: 6
+        }
+      ]
     }
   ]);
 
@@ -78,10 +138,158 @@ const CommunityForum = () => {
     : posts.filter(post => post.topic === selectedTopic);
 
   const handleLike = (postId) => {
-    setPosts(posts.map(post => 
-      post.id === postId ? { ...post, likes: post.likes + 1 } : post
-    ));
+    if (likedPosts.has(postId)) {
+      // Unlike the post
+      setLikedPosts(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(postId);
+        return newSet;
+      });
+      setPosts(posts.map(post => 
+        post.id === postId ? { ...post, likes: Math.max(0, post.likes - 1) } : post
+      ));
+    } else {
+      // Like the post
+      setLikedPosts(prev => new Set([...prev, postId]));
+      setPosts(posts.map(post => 
+        post.id === postId ? { ...post, likes: post.likes + 1 } : post
+      ));
+    }
   };
+
+  const handleViewReplies = (post) => {
+    setSelectedPost(post);
+  };
+
+  // Replies view
+  if (selectedPost) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <button
+            onClick={() => setSelectedPost(null)}
+            className="flex items-center text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 mb-6 font-medium"
+          >
+            <Reply className="h-5 w-5 mr-2" />
+            Back to Forum
+          </button>
+
+          {/* Original Post */}
+          <article className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center">
+                <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mr-3">
+                  <span className="text-green-600 dark:text-green-400 font-bold">
+                    {selectedPost.author.split(' ').map(n => n[0]).join('')}
+                  </span>
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold text-gray-900 dark:text-white">
+                      {selectedPost.author}
+                    </span>
+                    {getRoleBadge(selectedPost.authorRole)}
+                  </div>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    {selectedPost.timestamp}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              {selectedPost.title}
+            </h2>
+            <p className="text-gray-600 dark:text-gray-300 mb-4">
+              {selectedPost.content}
+            </p>
+
+            <div className="flex flex-wrap gap-2 mb-4">
+              {selectedPost.tags.map((tag, index) => (
+                <span 
+                  key={index}
+                  className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs rounded-full"
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <button
+                onClick={() => handleLike(selectedPost.id)}
+                className={`flex items-center gap-2 transition-colors ${
+                  likedPosts.has(selectedPost.id)
+                    ? 'text-green-600 dark:text-green-400'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400'
+                }`}
+              >
+                <ThumbsUp className="h-5 w-5" />
+                <span className="font-medium">{selectedPost.likes}</span>
+              </button>
+              <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+                <Reply className="h-5 w-5" />
+                <span className="font-medium">{selectedPost.replies} Replies</span>
+              </div>
+            </div>
+          </article>
+
+          {/* Replies */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+              Replies ({selectedPost.repliesData?.length || 0})
+            </h3>
+            
+            {selectedPost.repliesData?.map((reply) => (
+              <div key={reply.id} className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 ml-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mr-3">
+                      <span className="text-blue-600 dark:text-blue-400 font-bold text-sm">
+                        {reply.author.split(' ').map(n => n[0]).join('')}
+                      </span>
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-semibold text-gray-900 dark:text-white text-sm">
+                          {reply.author}
+                        </span>
+                        {reply.authorRole && getRoleBadge(reply.authorRole)}
+                      </div>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">
+                        {reply.timestamp}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-gray-600 dark:text-gray-300 text-sm ml-11">
+                  {reply.content}
+                </p>
+                <div className="flex items-center gap-4 mt-3 ml-11">
+                  <button className="flex items-center gap-1 text-gray-500 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                    <ThumbsUp className="h-4 w-4" />
+                    <span className="text-xs">{reply.likes}</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+
+            {(!selectedPost.repliesData || selectedPost.repliesData.length === 0) && (
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-8 text-center">
+                <MessageSquare className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  No replies yet
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Be the first to reply to this post!
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
@@ -226,12 +434,19 @@ const CommunityForum = () => {
                   <div className="flex items-center gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                     <button
                       onClick={() => handleLike(post.id)}
-                      className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+                      className={`flex items-center gap-2 transition-colors ${
+                        likedPosts.has(post.id)
+                          ? 'text-green-600 dark:text-green-400'
+                          : 'text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400'
+                      }`}
                     >
                       <ThumbsUp className="h-5 w-5" />
                       <span className="font-medium">{post.likes}</span>
                     </button>
-                    <button className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                    <button 
+                      onClick={() => handleViewReplies(post)}
+                      className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    >
                       <Reply className="h-5 w-5" />
                       <span className="font-medium">{post.replies} Replies</span>
                     </button>
