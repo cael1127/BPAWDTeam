@@ -19,9 +19,9 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, activeTab, setActiveTab, darkMo
                 <button
                   key={item}
                   onClick={() => setActiveTab(item)}
-                  className={`px-4 py-2 rounded-md text-sm font-medium capitalize transition-colors ${
+                  className={`px-4 py-2 rounded-md text-sm font-medium capitalize transition-all duration-200 transform hover:scale-105 ${
                     activeTab === item
-                      ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-100'
+                      ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-100 shadow-sm'
                       : 'text-gray-700 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400 hover:bg-gray-100 dark:hover:bg-gray-700'
                   }`}
                 >
@@ -35,7 +35,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, activeTab, setActiveTab, darkMo
           <div className="flex items-center space-x-2 flex-shrink-0">
             <button
               onClick={() => setDarkMode(!darkMode)}
-              className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-200 transform hover:scale-110 active:scale-95"
               aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
               {darkMode ? <Sun className="h-5 w-5" aria-hidden="true" /> : <Moon className="h-5 w-5" aria-hidden="true" />}
@@ -43,7 +43,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, activeTab, setActiveTab, darkMo
             
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="md:hidden p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-200 transform hover:scale-110 active:scale-95"
               aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={isMenuOpen}
             >
@@ -63,9 +63,9 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, activeTab, setActiveTab, darkMo
                   setActiveTab(item);
                   setIsMenuOpen(false);
                 }}
-                className={`block px-4 py-3 rounded-md text-base font-medium capitalize w-full text-left transition-colors ${
+                className={`block px-4 py-3 rounded-md text-base font-medium capitalize w-full text-left transition-all duration-200 transform hover:scale-105 ${
                   activeTab === item
-                    ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-100'
+                    ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-100 shadow-sm'
                     : 'text-gray-700 hover:text-green-600 dark:text-gray-300 dark:hover:text-green-400 hover:bg-gray-100 dark:hover:bg-gray-700'
                 }`}
               >
