@@ -33,13 +33,13 @@
 
 **[Stand confidently, make eye contact with all judges]**
 
-"Good morning/afternoon, board members. I'm presenting MindWell, a scalable mental health platform that addresses a $280 billion market opportunity while delivering measurable social impact.
+"Good morning/afternoon, board members. I'm presenting MindWell, a scalable mental health platform that addresses a massive market opportunity while delivering measurable social impact.
 
-The mental health crisis costs the US economy $280 billion annually in lost productivity and healthcare costs. 60% of those needing help don't receive it due to accessibility barriers.
+The mental health crisis costs the US economy hundreds of billions annually in lost productivity and healthcare costs. A significant percentage of those needing help don't receive it due to accessibility barriers.
 
-Our solution: MindWell—a comprehensive digital platform that reduces mental health service costs by 40% while increasing access by 300% through local resource optimization and community-driven support.
+Our solution: MindWell—a comprehensive digital platform that significantly reduces mental health service costs while dramatically increasing access through local resource optimization and community-driven support.
 
-We're seeking $2M Series A funding to achieve $15M ARR within 3 years."
+We're seeking Series A funding to achieve substantial ARR growth within 3 years."
 
 **[Advance to next slide]**
 
