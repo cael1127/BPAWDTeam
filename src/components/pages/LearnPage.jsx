@@ -13,28 +13,58 @@ const LearnPage = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {mentalHealthDisorders.map((disorder, index) => (
-            <div key={index} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{disorder.title}</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">{disorder.description}</p>
+            <div key={index} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-105 group">
+              <div className="flex items-start justify-between mb-4">
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">{disorder.title}</h2>
+                <Shield className="h-6 w-6 text-green-600 dark:text-green-400 flex-shrink-0" />
+              </div>
+              
+              <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">{disorder.description}</p>
+              
+              {/* Prevalence and Treatment Info */}
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3">
+                  <h4 className="text-xs font-semibold text-green-800 dark:text-green-200 mb-1">Prevalence</h4>
+                  <p className="text-sm text-green-700 dark:text-green-300">{disorder.prevalence}</p>
+                </div>
+                <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
+                  <h4 className="text-xs font-semibold text-blue-800 dark:text-blue-200 mb-1">Treatment</h4>
+                  <p className="text-sm text-blue-700 dark:text-blue-300">{disorder.treatment}</p>
+                </div>
+              </div>
               
               <div className="mb-4">
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Common Symptoms:</h3>
-                <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1">
-                  {disorder.symptoms.map((symptom, i) => (
-                    <li key={i}>{symptom}</li>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">Common Symptoms:</h3>
+                <div className="flex flex-wrap gap-1">
+                  {disorder.symptoms.slice(0, 4).map((symptom, i) => (
+                    <span key={i} className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs rounded-full">
+                      {symptom}
+                    </span>
                   ))}
-                </ul>
+                  {disorder.symptoms.length > 4 && (
+                    <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-xs rounded-full">
+                      +{disorder.symptoms.length - 4} more
+                    </span>
+                  )}
+                </div>
               </div>
               
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Available Resources:</h3>
-                <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1">
-                  {disorder.resources.map((resource, i) => (
-                    <li key={i}>{resource}</li>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">Available Resources:</h3>
+                <div className="flex flex-wrap gap-1">
+                  {disorder.resources.slice(0, 3).map((resource, i) => (
+                    <span key={i} className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs rounded-full">
+                      {resource}
+                    </span>
                   ))}
-                </ul>
+                  {disorder.resources.length > 3 && (
+                    <span className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-500 dark:text-green-400 text-xs rounded-full">
+                      +{disorder.resources.length - 3} more
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           ))}

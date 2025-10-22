@@ -2,6 +2,7 @@ import React from 'react';
 import { Phone, Users } from 'lucide-react';
 import { helplines } from '../../data/mentalHealthData';
 import AppointmentForm from '../forms/AppointmentForm';
+import LocalHelplineFinder from '../LocalHelplineFinder';
 
 const SupportPage = () => {
   return (
@@ -14,12 +15,17 @@ const SupportPage = () => {
           </p>
         </div>
 
-        {/* Helplines */}
+        {/* Local Helpline Finder */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Crisis Helplines</h2>
+          <LocalHelplineFinder />
+        </section>
+
+        {/* National Helplines */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">National Crisis Helplines</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {helplines.map((helpline, index) => (
-              <div key={index} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+              <div key={index} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                 <div className="flex items-center mb-4">
                   <Phone className="h-6 w-6 text-red-500 mr-3" />
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{helpline.name}</h3>
