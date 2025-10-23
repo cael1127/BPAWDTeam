@@ -5,7 +5,7 @@ const path = require('path');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const DOMPurify = require('dompurify');
-const JSDOM = require('jsdom');
+const { JSDOM } = require('jsdom');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -27,6 +27,7 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
   'https://mindwell-campaign.netlify.app',
+  'https://bpawd.netlify.app',
   process.env.FRONTEND_URL
 ].filter(Boolean);
 
@@ -323,10 +324,8 @@ app.get('/api/posts', async (req, res) => {
     const data = await fs.readFile(COMMUNITY_FILE, 'utf8');
     const posts = JSON.parse(data);
     
-    // Return only approved posts
-    const approvedPosts = posts.filter(post => post.isModerated === true);
-    
-    res.json({ posts: approvedPosts });
+    // Return all posts (remove moderation filter for now)
+    res.json({ posts: posts });
   } catch (error) {
     console.error('Error reading community posts:', error);
     res.status(500).json({ error: 'Failed to retrieve community posts' });
@@ -342,8 +341,10 @@ app.post('/api/posts', formLimiter, async (req, res) => {
     const sanitizedData = {
       title: sanitizeInput(rawData.title),
       content: sanitizeInput(rawData.content),
-      category: sanitizeInput(rawData.category || 'general'),
-      author: `user_${Math.random().toString(36).substr(2, 9)}` // Anonymous user ID
+      topic: sanitizeInput(rawData.topic || 'general'),
+      author: sanitizeInput(rawData.author || 'Anonymous User'),
+      authorRole: sanitizeInput(rawData.authorRole || 'member'),
+      tags: Array.isArray(rawData.tags) ? rawData.tags.map(t => sanitizeInput(t)).filter(Boolean) : []
     };
     
     // Validate data
@@ -361,28 +362,160 @@ app.post('/api/posts', formLimiter, async (req, res) => {
     
     // Create new post
     const newPost = {
-      id: `post_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      id: posts.length + 1, // Simple incremental ID
       ...sanitizedData,
-      replies: [],
-      isModerated: false, // Requires moderation before appearing publicly
+      likes: 0,
+      replies: 0,
+      timestamp: 'Just now',
+      repliesData: [],
       createdAt: new Date().toISOString()
     };
     
     // Add to posts array
-    posts.push(newPost);
+    posts.unshift(newPost); // Add to beginning for newest first
     
     // Save to file
     await fs.writeFile(COMMUNITY_FILE, JSON.stringify(posts, null, 2));
     
     res.status(201).json({
       success: true,
-      message: 'Post submitted successfully and is pending moderation',
-      postId: newPost.id
+      message: 'Post created successfully',
+      post: newPost
     });
     
   } catch (error) {
     console.error('Error creating community post:', error);
     res.status(500).json({ error: 'Failed to create community post' });
+  }
+});
+
+// Add reply to post
+app.post('/api/posts/:postId/replies', formLimiter, async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const rawData = req.body;
+    
+    // Sanitize inputs
+    const sanitizedData = {
+      author: sanitizeInput(rawData.author || 'Anonymous User'),
+      authorRole: sanitizeInput(rawData.authorRole || 'member'),
+      content: sanitizeInput(rawData.content),
+      timestamp: 'Just now'
+    };
+    
+    // Validate data
+    if (!sanitizedData.content || sanitizedData.content.length < 3) {
+      return res.status(400).json({ errors: ['Reply must be at least 3 characters long'] });
+    }
+    
+    // Read existing posts
+    const data = await fs.readFile(COMMUNITY_FILE, 'utf8');
+    const posts = JSON.parse(data);
+    
+    // Find the post
+    const postIndex = posts.findIndex(post => post.id == postId);
+    if (postIndex === -1) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+    
+    // Create new reply
+    const newReply = {
+      id: posts[postIndex].repliesData ? posts[postIndex].repliesData.length + 1 : 1,
+      ...sanitizedData,
+      likes: 0
+    };
+    
+    // Add reply to post
+    if (!posts[postIndex].repliesData) {
+      posts[postIndex].repliesData = [];
+    }
+    posts[postIndex].repliesData.push(newReply);
+    posts[postIndex].replies = posts[postIndex].repliesData.length;
+    
+    // Save to file
+    await fs.writeFile(COMMUNITY_FILE, JSON.stringify(posts, null, 2));
+    
+    res.status(201).json({
+      success: true,
+      message: 'Reply added successfully',
+      reply: newReply
+    });
+    
+  } catch (error) {
+    console.error('Error adding reply:', error);
+    res.status(500).json({ error: 'Failed to add reply' });
+  }
+});
+
+// Like/unlike a post
+app.post('/api/posts/:postId/like', formLimiter, async (req, res) => {
+  try {
+    const { postId } = req.params;
+    
+    // Read existing posts
+    const data = await fs.readFile(COMMUNITY_FILE, 'utf8');
+    const posts = JSON.parse(data);
+    
+    // Find the post
+    const postIndex = posts.findIndex(post => post.id == postId);
+    if (postIndex === -1) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+    
+    // Toggle like (simple implementation - in production you'd track user-specific likes)
+    posts[postIndex].likes = (posts[postIndex].likes || 0) + 1;
+    
+    // Save to file
+    await fs.writeFile(COMMUNITY_FILE, JSON.stringify(posts, null, 2));
+    
+    res.status(200).json({
+      success: true,
+      message: 'Post liked successfully',
+      likes: posts[postIndex].likes
+    });
+    
+  } catch (error) {
+    console.error('Error liking post:', error);
+    res.status(500).json({ error: 'Failed to like post' });
+  }
+});
+
+// Like a reply
+app.post('/api/posts/:postId/replies/:replyId/like', formLimiter, async (req, res) => {
+  try {
+    const { postId, replyId } = req.params;
+    
+    // Read existing posts
+    const data = await fs.readFile(COMMUNITY_FILE, 'utf8');
+    const posts = JSON.parse(data);
+    
+    // Find the post
+    const postIndex = posts.findIndex(post => post.id == postId);
+    if (postIndex === -1) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+    
+    // Find the reply
+    const replyIndex = posts[postIndex].repliesData?.findIndex(reply => reply.id == replyId);
+    if (replyIndex === -1 || !posts[postIndex].repliesData) {
+      return res.status(404).json({ error: 'Reply not found' });
+    }
+    
+    // Like the reply
+    posts[postIndex].repliesData[replyIndex].likes = (posts[postIndex].repliesData[replyIndex].likes || 0) + 1;
+    
+    // Save to file
+    await fs.writeFile(COMMUNITY_FILE, JSON.stringify(posts, null, 2));
+    
+    res.status(200).json({
+      success: true,
+      message: 'Reply liked successfully',
+      likes: posts[postIndex].repliesData[replyIndex].likes
+    });
+    
+  } catch (error) {
+    console.error('Error liking reply:', error);
+    res.status(500).json({ error: 'Failed to like reply' });
   }
 });
 
