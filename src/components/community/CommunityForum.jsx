@@ -10,7 +10,7 @@ const CommunityForum = () => {
   const [newPost, setNewPost] = useState({
     title: '',
     content: '',
-    topic: 'general',
+      topic: 'general',
     tags: []
   });
   const [posts, setPosts] = useState([]);
@@ -144,83 +144,83 @@ const CommunityForum = () => {
     <div className="max-w-6xl mx-auto">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
-        <div>
+            <div>
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Community Forum</h2>
           <p className="text-gray-600 dark:text-gray-300">Share experiences, offer support, and connect with others</p>
-        </div>
+            </div>
         <button
           onClick={() => setShowNewPostForm(true)}
           className="mt-4 sm:mt-0 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 active:scale-95"
         >
           + New Post
         </button>
-      </div>
+        </div>
 
       {/* Topic Filter */}
       <div className="flex flex-wrap gap-2 mb-8">
-        {topics.map((topic) => {
-          const Icon = topic.icon;
-          return (
-            <button
-              key={topic.id}
-              onClick={() => setSelectedTopic(topic.id)}
+                {topics.map((topic) => {
+                  const Icon = topic.icon;
+                  return (
+                    <button
+                      key={topic.id}
+                      onClick={() => setSelectedTopic(topic.id)}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 ${
-                selectedTopic === topic.id
-                  ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300'
+                        selectedTopic === topic.id
+                          ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300'
                   : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-              }`}
-            >
+                      }`}
+                    >
               <Icon className="h-4 w-4" />
               {topic.name}
-            </button>
-          );
-        })}
-      </div>
+                    </button>
+                  );
+                })}
+              </div>
 
       {/* Posts Grid */}
       <div className="grid gap-6">
-        {filteredPosts.map((post) => (
+            {filteredPosts.map((post) => (
           <div key={post.id} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
                   <span className="text-green-600 dark:text-green-400 font-semibold">
-                    {post.author.split(' ').map(n => n[0]).join('')}
-                  </span>
-                </div>
-                <div>
+                          {post.author.split(' ').map(n => n[0]).join('')}
+                        </span>
+                      </div>
+                      <div>
                   <div className="flex items-center space-x-2">
                     <span className="font-semibold text-gray-900 dark:text-white">{post.author}</span>
                     {post.authorRole && getRoleBadge(post.authorRole)}
-                  </div>
+                        </div>
                   <span className="text-sm text-gray-500 dark:text-gray-400">{post.timestamp}</span>
-                </div>
-              </div>
+                      </div>
+                    </div>
               <button className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                <Flag className="h-5 w-5" />
-              </button>
-            </div>
+                      <Flag className="h-5 w-5" />
+                    </button>
+                  </div>
 
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{post.title}</h3>
             <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">{post.content}</p>
 
             {post.tags && post.tags.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-4">
-                {post.tags.map((tag, index) => (
-                  <span
-                    key={index}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {post.tags.map((tag, index) => (
+                      <span 
+                        key={index}
                     className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm rounded-full"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
             )}
 
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-6">
-                <button
-                  onClick={() => handleLike(post.id)}
+                    <button
+                      onClick={() => handleLike(post.id)}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200 transform hover:scale-105 ${
                     likedPosts.has(post.id)
                       ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300'
@@ -229,16 +229,16 @@ const CommunityForum = () => {
                 >
                   <ThumbsUp className="h-4 w-4" />
                   <span className="text-sm font-medium">{post.likes}</span>
-                </button>
+                    </button>
                 <button
                   onClick={() => handleViewReplies(post)}
                   className="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200 transform hover:scale-105"
                 >
                   <Reply className="h-4 w-4" />
                   <span className="text-sm font-medium">{post.replies}</span>
-                </button>
-              </div>
-            </div>
+                    </button>
+                  </div>
+                </div>
           </div>
         ))}
       </div>
@@ -428,8 +428,8 @@ const CommunityForum = () => {
                     <div className="text-center py-8 text-gray-500 dark:text-gray-400">
                       <MessageSquare className="h-12 w-12 mx-auto mb-4 opacity-50" />
                       <p>Be the first to reply to this post!</p>
-                    </div>
-                  )}
+              </div>
+            )}
                 </div>
 
                 {/* Add Reply Form */}
@@ -458,9 +458,9 @@ const CommunityForum = () => {
                     </button>
                   </div>
                 </div>
-              </div>
-            </div>
           </div>
+        </div>
+      </div>
         </div>
       )}
     </div>

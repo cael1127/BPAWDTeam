@@ -10,26 +10,22 @@ const CommunityPage = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Diagonal peach accent */}
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-bl from-orange-300 via-orange-200 to-transparent transform rotate-12 translate-x-1/4 -translate-y-1/4 opacity-60"></div>
-        <div className="absolute top-0 right-0 w-1/4 h-full bg-gradient-to-bl from-orange-400 via-orange-300 to-transparent transform rotate-12 translate-x-1/3 -translate-y-1/3 opacity-40"></div>
-        
-        <div className="relative max-w-7xl mx-auto text-center z-10">
+      <section className="bg-gradient-to-r from-green-600 to-emerald-600 text-white py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Connect & Support Each Other
           </h1>
-          <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-green-100 mb-8 max-w-3xl mx-auto">
             Join our safe, moderated community where you can share experiences, offer support, and build meaningful connections with others who understand.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => setActiveView('forum')}
-              className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
+              className={`px-8 py-3 rounded-lg font-semibold transition-colors ${
                 activeView === 'forum'
-                  ? 'bg-orange-400 text-gray-900 shadow-lg'
-                  : 'bg-gray-700 hover:bg-gray-600 text-white border border-gray-600'
+                  ? 'bg-white text-green-600'
+                  : 'bg-green-500 hover:bg-green-400 text-white'
               }`}
             >
               <MessageCircle className="inline-block h-5 w-5 mr-2" />
@@ -37,7 +33,7 @@ const CommunityPage = () => {
             </button>
             <button
               onClick={() => setShowChat(!showChat)}
-              className="px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
+              className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition-colors"
             >
               <Users className="inline-block h-5 w-5 mr-2" />
               {showChat ? 'Hide' : 'Join'} Live Chat
