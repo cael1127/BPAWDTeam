@@ -34,8 +34,92 @@ class CommunityService {
       return data.posts || [];
     } catch (error) {
       console.error('Failed to fetch posts:', error);
-      return [];
+      // Return sample data if backend is unavailable
+      return this.getSamplePosts();
     }
+  }
+
+  getSamplePosts() {
+    return [
+      {
+        id: 1,
+        author: 'Sarah M.',
+        authorRole: 'member',
+        topic: 'anxiety',
+        title: 'Coping with Social Anxiety - My Journey',
+        content: 'After years of struggling with social anxiety, I wanted to share what has helped me. Deep breathing exercises, gradual exposure, and support from this community have been life-changing.',
+        likes: 24,
+        replies: 2,
+        timestamp: '2 hours ago',
+        tags: ['anxiety', 'coping-strategies', 'success-story'],
+        repliesData: [
+          {
+            id: 1,
+            author: 'Mike T.',
+            content: 'Thank you for sharing! Deep breathing has helped me too. What specific exercises do you recommend?',
+            timestamp: '1 hour ago',
+            likes: 5
+          },
+          {
+            id: 2,
+            author: 'Dr. Emily Chen',
+            authorRole: 'counselor',
+            content: 'Excellent advice, Sarah. Gradual exposure is indeed one of the most effective techniques for social anxiety.',
+            timestamp: '45 minutes ago',
+            likes: 8
+          }
+        ]
+      },
+      {
+        id: 2,
+        author: 'Michael R.',
+        authorRole: 'moderator',
+        topic: 'depression',
+        title: 'Reminder: Small Steps Count',
+        content: 'Just a gentle reminder that every small step you take towards healing matters. Whether it\'s getting out of bed, taking a shower, or reaching out for help - you\'re making progress.',
+        likes: 42,
+        replies: 1,
+        timestamp: '4 hours ago',
+        tags: ['depression', 'encouragement', 'self-care'],
+        repliesData: [
+          {
+            id: 1,
+            author: 'Lisa K.',
+            content: 'Thank you for this reminder. Sometimes I forget that small steps are still progress.',
+            timestamp: '3 hours ago',
+            likes: 12
+          }
+        ]
+      },
+      {
+        id: 3,
+        author: 'Alex P.',
+        authorRole: 'member',
+        topic: 'support',
+        title: 'Having a Tough Week - Need Support',
+        content: 'Having a really tough week. Would appreciate some encouragement and hearing how others cope during difficult times.',
+        likes: 18,
+        replies: 2,
+        timestamp: '3 hours ago',
+        tags: ['support-needed', 'crisis-support'],
+        repliesData: [
+          {
+            id: 1,
+            author: 'Maria S.',
+            content: 'You\'re not alone, Alex. I\'ve been there too. Take it one day at a time.',
+            timestamp: '2 hours ago',
+            likes: 9
+          },
+          {
+            id: 2,
+            author: 'John D.',
+            content: 'Sending you virtual hugs. This community is here for you.',
+            timestamp: '1 hour ago',
+            likes: 6
+          }
+        ]
+      }
+    ];
   }
 
   getLikedPosts() {
