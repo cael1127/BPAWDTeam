@@ -18,16 +18,8 @@ const CommunityForum = () => {
 
   // Load data from service on component mount
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        const postsData = await communityService.getPosts();
-        setPosts(postsData);
-        setLikedPosts(communityService.getLikedPosts());
-      } catch (error) {
-        console.error('Failed to load posts:', error);
-      }
-    };
-    loadData();
+    setPosts(communityService.getPosts());
+    setLikedPosts(communityService.getLikedPosts());
   }, []);
 
   const topics = [
@@ -53,17 +45,11 @@ const CommunityForum = () => {
     ? posts 
     : posts.filter(post => post.topic === selectedTopic);
 
-  const handleLike = async (postId) => {
-    try {
-      const result = await communityService.toggleLike(postId);
-      if (result) {
-        setLikedPosts(communityService.getLikedPosts());
-        // Refresh posts to get updated like counts
-        const postsData = await communityService.getPosts();
-        setPosts(postsData);
-      }
-    } catch (error) {
-      console.error('Failed to like post:', error);
+  const handleLike = (postId) => {
+    const result = communityService.toggleLike(postId);
+    if (result) {
+      setLikedPosts(communityService.getLikedPosts());
+      setPosts(communityService.getPosts());
     }
   };
 
@@ -71,58 +57,45 @@ const CommunityForum = () => {
     setSelectedPost(post);
   };
 
-  const handleNewPost = async () => {
+  const handleNewPost = () => {
     if (newPost.title.trim() && newPost.content.trim()) {
-      try {
-        const post = {
-          author: 'You',
-          authorRole: 'member',
-          topic: newPost.topic,
-          title: newPost.title,
-          content: newPost.content,
-          tags: newPost.tags
-        };
-        await communityService.addPost(post);
-        const postsData = await communityService.getPosts();
-        setPosts(postsData);
-        setNewPost({ title: '', content: '', topic: 'general', tags: [] });
-        setShowNewPostForm(false);
-      } catch (error) {
-        console.error('Failed to create post:', error);
-      }
+      const post = {
+        author: 'You',
+        authorRole: 'member',
+        topic: newPost.topic,
+        title: newPost.title,
+        content: newPost.content,
+        tags: newPost.tags
+      };
+      communityService.addPost(post);
+      setPosts(communityService.getPosts());
+      setNewPost({ title: '', content: '', topic: 'general', tags: [] });
+      setShowNewPostForm(false);
     }
   };
 
-  const handleAddReply = async () => {
+  const handleAddReply = () => {
     if (replyText.trim() && selectedPost) {
-      try {
-        const reply = {
-          author: 'You',
-          content: replyText.trim(),
-          timestamp: 'Just now'
-        };
-        await communityService.addReply(selectedPost.id, reply);
-        const postsData = await communityService.getPosts();
-        setPosts(postsData);
-        setReplyText('');
-        // Update selectedPost with new data
-        setSelectedPost(postsData.find(p => p.id === selectedPost.id));
-      } catch (error) {
-        console.error('Failed to add reply:', error);
-      }
+      const reply = {
+        author: 'You',
+        content: replyText.trim(),
+        timestamp: 'Just now'
+      };
+      communityService.addReply(selectedPost.id, reply);
+      const postsData = communityService.getPosts();
+      setPosts(postsData);
+      setReplyText('');
+      // Update selectedPost with new data
+      setSelectedPost(postsData.find(p => p.id === selectedPost.id));
     }
   };
 
-  const handleLikeReply = async (postId, replyId) => {
-    try {
-      const newLikes = await communityService.likeReply(postId, replyId);
-      if (newLikes !== null) {
-        const postsData = await communityService.getPosts();
-        setPosts(postsData);
-        setSelectedPost(postsData.find(p => p.id === postId));
-      }
-    } catch (error) {
-      console.error('Failed to like reply:', error);
+  const handleLikeReply = (postId, replyId) => {
+    const newLikes = communityService.likeReply(postId, replyId);
+    if (newLikes !== null) {
+      const postsData = communityService.getPosts();
+      setPosts(postsData);
+      setSelectedPost(postsData.find(p => p.id === postId));
     }
   };
 
