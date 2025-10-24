@@ -60,10 +60,13 @@ POST /api/mood-tracker
 GET /api/mood-history
 ```
 
-### Community
+### Community Forum
 ```
-POST /api/posts
-GET /api/posts
+GET /api/posts                    # Get all posts
+POST /api/posts                   # Create new post
+POST /api/posts/:postId/replies   # Add reply to post
+POST /api/posts/:postId/like      # Like a post
+POST /api/posts/:postId/replies/:replyId/like  # Like a reply
 ```
 
 ### Testimonials
